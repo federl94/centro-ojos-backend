@@ -79,24 +79,31 @@ export const eliminarUsuario = async (req, res) => {
 export const login = async (req, res) => {
   try {
     let usuario = await Usuario.findOne({ email: req.body.email });
+    console.log('Found user:', usuario);
+
     if (!usuario) {
       return res.status(404).json({ mensaje: "Correo o contraseña invalido" });
     }
+    
     const passwordValido = bcrypt.compareSync(
       req.body.password,
       usuario.password
     );
+    console.log('Password validation result:', passwordValido);
+
     if (!passwordValido) {
       return res.status(400).json({ mensaje: "Correo o contraseña invalido" });
     }
-    const token = await generarJWT(usuario.nombreUsuario)
+
+    const token = await generarJWT(usuario.nombreUsuario);
+    console.log('Generated token:', token);
+
     res.status(200).json({
       mensaje: "Usuario autenticado correctamente",
       nombreUsuario: usuario.nombreUsuario,
       esAdmin: usuario.esAdmin,
-      email : usuario.email,
-      token
-
+      email: usuario.email,
+      token,
     });
   } catch (error) {
     console.log(error);
