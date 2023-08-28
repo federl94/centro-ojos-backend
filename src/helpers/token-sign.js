@@ -5,7 +5,7 @@ const generarJWT = (nombreUsuario)=>{
         //agregar los datos al payload
         const payload = {nombreUsuario};
         //aqui firmamos el token
-        jwt.sign(payload,process.env.SECRET_JWTT,{
+        jwt.sign(payload,process.env.SECRET_JWT,{
             expiresIn: '2h'
         },(err, token)=>{
             if(err){
