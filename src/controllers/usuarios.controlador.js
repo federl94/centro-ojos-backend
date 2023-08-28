@@ -103,7 +103,7 @@ export const login = async (req, res) => {
       nombreUsuario: usuario.nombreUsuario,
       esAdmin: usuario.esAdmin,
       email: usuario.email,
-      token,
+      token
     });
   } catch (error) {
     console.log(error);
