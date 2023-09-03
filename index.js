@@ -29,4 +29,4 @@ app.use(express.static(path.join(__dirname, '/public')))
 app.use('/centromedico/apipaciente', pacientesRouter);
 app.use('/centromedico/apiturno', turnosRouter );
 app.use('/centromedico/auth', usuariosRouter);
-app.use('/centromedico/apimedico', medicosRouter);
+app.use('/centromedico/apimedicos', medicosRouter);
