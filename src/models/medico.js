@@ -35,8 +35,6 @@ const medicoSchema = new Schema({
     },
     obrasSociales: {
         type: String,
-        minLength: 3,
-        maxLength: 200,
         required: true
     }
 })

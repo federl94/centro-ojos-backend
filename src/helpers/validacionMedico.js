@@ -24,9 +24,7 @@ const validarMedico = [
     .withMessage("La especialidad debe tener entre 3 y 40 carateres"),    
     check("obrasSociales")
     .notEmpty()
-    .withMessage("Las obras sociales con las que trabaja es obligatoria")
-    .isLength({min: 3, max: 200})
-    .withMessage("La obra social debe tener entre 3 y 200 caracteres"),
+    .withMessage("Las obras sociales con las que trabaja es obligatoria"),
     (req, res, next)=>{resultadoValidacion(req, res, next)}
 ]
 

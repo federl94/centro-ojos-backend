@@ -8,6 +8,7 @@ import pacientesRouter from './src/routes/pacientes.routes';
 import turnosRouter from './src/routes/turnos.routes';
 import usuariosRouter from './src/routes/usuarios.routes';
 import medicosRouter from './src/routes/medicos.routes';
+import obrasocialRouter from './src/routes/obrasocial.routes'
 
 // usar un puerto
 const app =express();
@@ -30,3 +31,4 @@ app.use('/centromedico/apipaciente', pacientesRouter);
 app.use('/centromedico/apiturno', turnosRouter );
 app.use('/centromedico/auth', usuariosRouter);
 app.use('/centromedico/apimedicos', medicosRouter);
+app.use('/centromedico/apiobrasocial', obrasocialRouter)
