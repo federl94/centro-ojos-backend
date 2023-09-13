@@ -5,7 +5,7 @@ import {
   crearObraSocial,
   borrarObraSocial,
   editarObraSocial,
-} from "../controllers/obrasSociales.controlador";
+} from "../controllers/obrasocial.controlador";
 import validarObraSocial from "../helpers/validacionObraSocial";
 
 const router = Router();
