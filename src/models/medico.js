@@ -36,7 +36,11 @@ const medicoSchema = new Schema({
     obrasSociales: {
         type: String,
         required: true
-    }
+    },
+    diasTrabajo: [{
+        type: String,
+        enum: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"],
+    }]
 })
 
 const Medico = model('medico', medicoSchema);
