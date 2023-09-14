@@ -40,6 +40,7 @@ const medicoSchema = new Schema({
     diasTrabajo: [{
         type: String,
         enum: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"],
+        default: [],
     }]
 })
 
