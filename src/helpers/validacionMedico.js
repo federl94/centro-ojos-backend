@@ -26,12 +26,13 @@ const validarMedico = [
     .notEmpty()
     .withMessage("Las obras sociales con las que trabaja son obligatorias"),
     check("diasTrabajo")
-    .custom((diasTrabajo) => {
-        if (!isArray(diasTrabajo)) {
-            throw new Error("Los días de trabajo deben ser un array");
-        }
-        return true;
-    }),
+  .custom((diasTrabajo) => {
+    if (!Array.isArray(diasTrabajo)) {
+      throw new Error("Los días de trabajo deben ser un array");
+    }
+    return true;
+  })
+,
     (req, res, next) => {
         resultadoValidacion(req, res, next);
     }
