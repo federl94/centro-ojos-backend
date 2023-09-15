@@ -1,4 +1,4 @@
-import { check, isArray } from "express-validator";
+import { check } from "express-validator";
 import resultadoValidacion from "./resultadoValidacion";
 
 const validarMedico = [
