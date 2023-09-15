@@ -12,6 +12,7 @@ export const obtenerUsuarios = async (req, res) => {
     });
   }
 };
+
 export const obtenerUsuario = async (req, res) => {
   try {
     console.log(req.params.id);
@@ -24,6 +25,7 @@ export const obtenerUsuario = async (req, res) => {
     });
   }
 };
+
 export const crearUsuario = async (req, res) => {
   try {
     let usuario = await Usuario.findOne({ email: req.body.email });
@@ -32,7 +34,16 @@ export const crearUsuario = async (req, res) => {
         .status(400)
         .json({ mensaje: "Ya existe un usuario con el mail enviado" });
     }
+
     const usuarioNuevo = new Usuario(req.body);
+
+    // Agregar la lógica para establecer esMedico según tus necesidades
+    if (req.body.esMedico !== undefined) {
+      usuarioNuevo.esMedico = req.body.esMedico;
+    } else {
+      usuarioNuevo.esMedico = false; // Valor por defecto si no se proporciona
+    }
+
     const salt = bcrypt.genSaltSync(10);
     usuarioNuevo.password = bcrypt.hashSync(req.body.password, salt);
     await usuarioNuevo.save();
@@ -49,6 +60,11 @@ export const crearUsuario = async (req, res) => {
 
 export const editarUsuario = async (req, res) => {
   try {
+    // Agregar la lógica para actualizar esMedico según tus necesidades
+    if (req.body.esMedico !== undefined) {
+      req.body.esMedico = req.body.esMedico;
+    }
+
     await Usuario.findByIdAndUpdate(req.params.id, req.body);
     res.status(200).json({
       mensaje: "El usuario fue editado de manera exitosa",
@@ -56,7 +72,7 @@ export const editarUsuario = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(404).json({
-      mensaje: "El usuario no pudo ser modificado ",
+      mensaje: "El usuario no pudo ser modificado",
     });
   }
 };
@@ -81,7 +97,7 @@ export const login = async (req, res) => {
     console.log('Found user:', usuario);
 
     if (!usuario) {
-      return res.status(404).json({ mensaje: "Correo o contraseña invalido" });
+      return res.status(404).json({ mensaje: "Correo o contraseña inválido" });
     }
     
     const passwordValido = bcrypt.compareSync(
@@ -91,19 +107,20 @@ export const login = async (req, res) => {
     console.log('Password validation result:', passwordValido);
 
     if (!passwordValido) {
-      return res.status(400).json({ mensaje: "Correo o contraseña invalido" });
+      return res.status(400).json({ mensaje: "Correo o contraseña inválido" });
     }
     
     res.status(200).json({
       mensaje: "Usuario autenticado correctamente",
       nombreUsuario: usuario.nombreUsuario,
       esAdmin: usuario.esAdmin,
+      esMedico: usuario.esMedico, // Asegúrate de devolver también esMedico
       email: usuario.email,
     });
   } catch (error) {
     console.log(error);
     res.status(400).json({
-      mensaje: "Error al intentar loguear un usuario",
+      mensaje: "Error al intentar iniciar sesión",
     });
   }
 };

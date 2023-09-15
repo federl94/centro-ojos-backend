@@ -40,7 +40,11 @@ const usuarioSchema = new Schema({
     esAdmin:{
         type: Boolean,
         required:true
-    }
+    },
+    esMedico: {
+        type: Boolean,
+        required: false
+    },
 });
 
 const Usuario = model('usuario',usuarioSchema);
